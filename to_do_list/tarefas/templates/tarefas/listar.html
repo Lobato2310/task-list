@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Minhas Tarefas</title>
+</head>
+<body>
+    <div class="container">
+    <h1>Minhas Tarefas</h1>
+<a href="{% url 'criar_tarefa' %}">Criar Nova Tarefa</a>
+<ul>
+    {% for tarefa in tarefas %}
+        <li class="tarefa-item">
+            <span class="{% if tarefa.concluida %}concluida{% endif %}">
+                {{ tarefa.titulo }}
+            </span>
+            <a class="btn" href="{% url 'alternar_status' tarefa.id %}">Check</a>
+            <a class="btn" href="{% url 'editar_tarefa' tarefa.id %}">Editar</a>
+            <a class="btn" href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
+        </li>
+    {% empty %}
+        <p>Nenhuma tarefa cadastrada.</p>
+    {% endfor %}
+</ul>
+    </div>
+</body>
+</html>
