@@ -8,11 +8,10 @@
 </head>
 <body>
     <div class="container">
-    <h1>{% if tarefa %}Editar Tarefa{% else %}Nova Tarefa{% endif %}</h1>
+    <h1>{% if form.instance.pk %}Editar Tarefa{% else %}Nova Tarefa{% endif %}</h1>
 <form method="POST">
     {% csrf_token %}
-    <input class="form-input" type="text" name="titulo" value="{{ tarefa.titulo }}" placeholder="Titulo" required><br>
-    <textarea class="form-input" name="descricao" placeholder="Descrição">{{ tarefa.descricao }}</textarea><br>
+    {{ form.as_p }}
     <button class="btn-submit" type="submit">Salvar</button>
     <a class="btn btn-voltar" href="{% url 'listar_tarefas' %}">Voltar</a>
 </form>

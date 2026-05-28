@@ -3,7 +3,16 @@ from .models import Tarefa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import TarefaForm
 
+def get_tarefa_por_perfil(request, tarefa_id):
+    if request.user.is_superuser:
+        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    elif request.user.is_staff:
+        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    else:
+        tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
+    return tarefa
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -29,51 +38,47 @@ def listar_tarefas(request):
 @login_required
 def criar_tarefa(request):
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        descricao = request.POST.get('descricao')
-        status = request.POST.get('status')
-        prioridade = request.POST.get('prioridade')
-        prazo = request.POST.get('prazo')
-        Tarefa.objects.create(
-            titulo=titulo,
-            descricao=descricao,
-            status=status,
-            prioridade=prioridade,
-            prazo=prazo,
-            usuario=request.user
-        )
-        return redirect('listar_tarefas')
-    return render(request, 'tarefas/form.html')
-
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            tarefa = form.save(commit=False)
+            tarefa.usuario = request.user
+            tarefa.save()
+            return redirect('listar_tarefas')
+    else:
+        form = TarefaForm()
+    return render(request, 'tarefas/form.html', {'form': form})
 
 @login_required
 def editar_tarefa(request, tarefa_id):
-    if request.user.is_superuser:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
-    elif request.user.is_staff:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    tarefa = get_tarefa_por_perfil(request, tarefa_id)
+
+    if request.method == 'POST':
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_tarefas')
     else:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
-    
+        form = TarefaForm(instance=tarefa)
+    return render(request, 'tarefas/form.html', {'form': form})
 
 @login_required
 def alternar_status(request, tarefa_id):
-    tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
-    tarefa.concluida = not tarefa.concluida
-    tarefa.save()
+    tarefa = get_tarefa_por_perfil(request, tarefa_id)
+    novo_status = request.POST.get('novo_status')  
+    if novo_status in tarefa.mudanca_status():
+        tarefa.status = novo_status
+        tarefa.save()
+    else:
+        messages.error(request, 'Transição de status não permitida.')
     return redirect('listar_tarefas')
 
 @login_required
 def excluir_tarefa(request, tarefa_id):
-    if request.user.is_superuser:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
-    elif request.user.is_staff:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id)
-    else:
-        tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
+    tarefa = get_tarefa_por_perfil(request, tarefa_id)
     if tarefa.pode_excluir():
         tarefa.delete()
         return redirect('listar_tarefas')
     else:
         messages.error(request, "Tarefa concluída ou cancelada não pode ser excluída.")
         return redirect('listar_tarefas')
+    
