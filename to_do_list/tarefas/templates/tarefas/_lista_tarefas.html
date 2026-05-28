@@ -1,0 +1,20 @@
+<ul>
+            {% for tarefa in tarefas %}
+                <li class="tarefa-item">
+                <p>Responsável: {{ tarefa.usuario }}</p>
+                <p>Nome: {{ tarefa.titulo }}</p>
+                <p>Status: {{ tarefa.get_status_display }}</p>
+                <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                <p>Prazo: {{ tarefa.prazo|date:"d/m/Y" }}</p>
+            <form method='post' action="{% url 'alternar_status' tarefa.id %}">
+                {% csrf_token %}
+            <input type="hidden" name="novo_status" value="{{ tarefa.mudanca_status.0 }}">
+            <a class="btn" href="{% url 'editar_tarefa' tarefa.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
+            <button type="submit" class="btn">Atualizar Status</button>
+            </form>
+        </li>
+    {% empty %}
+        <p>Nenhuma tarefa cadastrada.</p>
+    {% endfor %}
+</ul>

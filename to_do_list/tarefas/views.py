@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import TarefaForm
 
+
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
         tarefa = get_object_or_404(Tarefa, id=tarefa_id)
@@ -32,7 +33,17 @@ def listar_tarefas(request):
         tarefas = Tarefa.objects.all()
     else:
         tarefas = Tarefa.objects.filter(usuario=request.user)
-
+    status = request.GET.get('status')
+    if status:
+        tarefas = tarefas.filter(status=status)
+    prioridade = request.GET.get('prioridade')
+    if prioridade:
+        tarefas = tarefas.filter(prioridade=prioridade)
+    prazo = request.GET.get('prazo')
+    if prazo:
+        tarefas = tarefas.order_by('prazo')
+    if request.headers.get('HX-Request'):
+        return render(request, 'tarefas/_lista_tarefas.html', {'tarefas': tarefas})
     return render(request, 'tarefas/listar.html', {'tarefas': tarefas})
 
 @login_required

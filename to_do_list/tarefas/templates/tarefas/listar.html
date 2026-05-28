@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
     <meta charset="UTF-8">
     <title>Minhas Tarefas</title>
@@ -16,29 +17,39 @@
         <h1>Minhas Tarefas</h1>
         <form method='post' action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit">Sair</button>"
+            <button type="submit" class="btn">Sair</button>
         </form>
         <a href="{% url 'criar_tarefa' %}">Criar Nova Tarefa</a>
-        <ul>
-            {% for tarefa in tarefas %}
-                <li class="tarefa-item">
-                <p>Responsável: {{ tarefa.usuario }}</p>
-                <p>Nome: {{ tarefa.titulo }}</p>
-                <p>Status: {{ tarefa.get_status_display }}</p>
-                <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
-                <p>Prazo: {{ tarefa.prazo|date:"d/m/Y" }}</p>
-            <form method='post' action="{% url 'alternar_status' tarefa.id %}">
-                {% csrf_token %}
-            <input type="hidden" name="novo_status" value="{{ tarefa.mudanca_status.0 }}">
-            <a class="btn" href="{% url 'editar_tarefa' tarefa.id %}">Editar</a>
-            <a class="btn" href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
-            <button type="submit">Atualizar Status</button>
-                </form>
-        </li>
-    {% empty %}
-        <p>Nenhuma tarefa cadastrada.</p>
-    {% endfor %}
-</ul>
+        <form method="get" hx-get="/" hx-target="#lista-tarefas" hx-trigger="change" class="filtros">
+            <span class="filtros-titulo">Filtros</span>
+            <div class="filtro-grupo">
+            <label for="status">Status</label>
+            <select name="status" id="status">
+                <option value="">Todos</option>
+                <option value="a_fazer">A Fazer</option>
+                <option value="em_andamento">Em Andamento</option>
+                <option value="em_revisao">Em Revisão</option>
+                <option value="concluida">Concluída</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
+        <div class="filtro-grupo">
+            <label for="prioridade">Prioridade</label>
+            <select name="prioridade" id="prioridade">
+                <option value="">Todas</option>
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+            </select>
+        </div>
+        <div class="filtro-grupo">
+            <label for="prazo">Prazo:</label>
+            <input type="date" name="prazo" id="prazo">
+        </div>
+        </form>
+        <div id="lista-tarefas">
+            {% include 'tarefas/_lista_tarefas.html' %}
+        </div>
     </div>
 </body>
 </html>
