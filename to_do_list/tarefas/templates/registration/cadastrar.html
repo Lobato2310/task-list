@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastrar Usuário</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn-submit" type="submit">Cadastrar</button>
+            <a class="btn btn-voltar" href="{% url 'login' %}">Voltar para Login</a>
+        </form>
+    </div>
+</body> 
+</html>

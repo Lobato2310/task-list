@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Kanban de Tarefas</title>
+</head>
+<body>
+    <div class="kanban-container">
+        <h1>Kanban de Tarefas</h1>
+    <div class="kanban-board">
+        <div class="kanban-coluna">
+            <div class="kanban-coluna-titulo">A Fazer</div>
+            <div class="kanban-coluna-conteudo">
+                {% for tarefa in a_fazer %}
+                <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
+                    <div class="tarefa-card">
+                        <h3>{{ tarefa.titulo }}</h3>
+                        <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="kanban-coluna">
+            <div class="kanban-coluna-titulo">Em Andamento</div>
+            <div class="kanban-coluna-conteudo">
+                {% for tarefa in em_andamento %}
+                <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
+                    <div class="tarefa-card">
+                        <h3>{{ tarefa.titulo }}</h3>
+                        <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div> 
+        <div class="kanban-coluna">
+            <div class="kanban-coluna-titulo">Em Revisão</div>
+            <div class="kanban-coluna-conteudo">
+                {% for tarefa in em_revisao %}
+                <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
+                    <div class="tarefa-card">
+                        <h3>{{ tarefa.titulo }}</h3>
+                        <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="kanban-coluna">
+            <div class="kanban-coluna-titulo">Concluídas</div>
+            <div class="kanban-coluna-conteudo">
+                {% for tarefa in concluida %}
+                <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
+                    <div class="tarefa-card">
+                        <h3>{{ tarefa.titulo }}</h3>
+                        <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="kanban-coluna">
+            <div class="kanban-coluna-titulo">Canceladas</div>
+            <div class="kanban-coluna-conteudo">
+                {% for tarefa in cancelada %}
+                <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
+                    <div class="tarefa-card">
+                        <h3>{{ tarefa.titulo }}</h3>
+                        <p>Prioridade: {{ tarefa.get_prioridade_display }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="kanban-nav">
+        <a class="btn" href="{% url 'listar_tarefas' %}">Voltar para Lista</a>
+         <form method='post' action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn">Sair</button>
+        </form>
+    </div>
+</body>
+</html>
