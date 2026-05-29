@@ -8,3 +8,7 @@ __pycache__/
 *.pot
 migrations/
 .env
+SECRET_KEY
+DEBUG
+ALLOWED_HOSTS
+DATABASE_URL
