@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import TarefaForm
+from django.db.models import Q
 
 
 def get_tarefa_por_perfil(request, tarefa_id):
@@ -42,9 +43,15 @@ def listar_tarefas(request):
     prazo = request.GET.get('prazo')
     if prazo:
         tarefas = tarefas.order_by('prazo')
+    busca = request.GET.get('busca')
+    if busca:
+        tarefas = tarefas.filter(
+            Q(titulo__icontains=busca) | Q(descricao__icontains=busca)
+        )
     if request.headers.get('HX-Request'):
         return render(request, 'tarefas/_lista_tarefas.html', {'tarefas': tarefas})
     return render(request, 'tarefas/listar.html', {'tarefas': tarefas})
+
 
 @login_required
 def criar_tarefa(request):

@@ -8,6 +8,11 @@
     --cor-danger:        #EF4444;
     --cor-success:       #10B981;
     --cor-warning:       #F59E0B;
+    --cor-a-fazer:       #64748B; 
+    --cor-em-andamento:  #0891B2;
+    --cor-em-revisao:    #F59E0B;
+    --cor-concluida:     #10B981;
+    --cor-cancelada:     #EF4444;
 }
 
 body {
@@ -162,4 +167,78 @@ button.btn {
 
 button.btn:hover {
     background-color: #4338ca;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge-a_fazer {
+    background-color: var(--cor-a-fazer);
+    color: var(--cor-texto);
+}
+
+.badge-em_andamento {
+    background-color: var(--cor-em-andamento);
+    color: var(--cor-texto);
+}
+
+.badge-em_revisao {
+    background-color: var(--cor-em-revisao);
+    color: var(--cor-texto);
+}
+
+.badge-concluida {
+    background-color: var(--cor-concluida);
+    color: var(--cor-texto);
+}
+
+.badge-cancelada {
+    background-color: var(--cor-cancelada);
+    color: var(--cor-texto);
+}
+
+.tarefa-item {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tarefa-titulo {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--cor-texto);
+    margin: 0;
+}
+
+.tarefa-responsavel {
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+    margin: 4px 0 0 0;
+}
+
+.tarefa-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tarefa-prazo {
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+}
+
+.tarefa-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.tarefa-acoes form {
+    margin: 0;
 }
