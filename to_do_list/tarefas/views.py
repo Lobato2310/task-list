@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import TarefaForm
 from django.db.models import Q
-
+from django.core.paginator import Paginator
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
@@ -48,6 +48,10 @@ def listar_tarefas(request):
         tarefas = tarefas.filter(
             Q(titulo__icontains=busca) | Q(descricao__icontains=busca)
         )
+    tarefas = tarefas.filter(arquivada=False)
+    paginator = Paginator(tarefas, 5) 
+    page_number = request.GET.get('page')
+    tarefas = paginator.get_page(page_number)
     if request.headers.get('HX-Request'):
         return render(request, 'tarefas/_lista_tarefas.html', {'tarefas': tarefas})
     return render(request, 'tarefas/listar.html', {'tarefas': tarefas})
@@ -91,12 +95,32 @@ def alternar_status(request, tarefa_id):
     return redirect('listar_tarefas')
 
 @login_required
-def excluir_tarefa(request, tarefa_id):
+def arquivar_tarefa(request, tarefa_id):
     tarefa = get_tarefa_por_perfil(request, tarefa_id)
     if tarefa.pode_excluir():
-        tarefa.delete()
+        tarefa.arquivada = True
+        tarefa.save()
         return redirect('listar_tarefas')
     else:
         messages.error(request, "Tarefa concluída ou cancelada não pode ser excluída.")
         return redirect('listar_tarefas')
     
+@login_required
+def tarefas_arquivadas(request, tarefa_id=None):
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.filter(arquivada=True)
+    elif request.user.is_staff:
+        tarefas = Tarefa.objects.filter(arquivada=True)
+    else:
+        tarefas = Tarefa.objects.filter(usuario=request.user, arquivada=True)
+    paginator = Paginator(tarefas, 5)
+    page_number = request.GET.get('page')
+    tarefas = paginator.get_page(page_number)
+    return render(request, 'tarefas/arquivadas.html', {'tarefas': tarefas})
+
+@login_required
+def desarquivar_tarefa(request, tarefa_id):
+    tarefa = get_tarefa_por_perfil(request, tarefa_id)
+    tarefa.arquivada = False
+    tarefa.save()
+    return redirect('tarefas_arquivadas')

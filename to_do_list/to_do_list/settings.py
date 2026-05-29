@@ -119,3 +119,4 @@ USE_TZ = True
 STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = 'listar_tarefas'
 LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = '/login/'

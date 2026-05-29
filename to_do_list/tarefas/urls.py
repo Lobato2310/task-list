@@ -8,5 +8,7 @@ urlpatterns = [
     path('nova/', views.criar_tarefa, name='criar_tarefa'),
     path('editar/<int:tarefa_id>/', views.editar_tarefa, name='editar_tarefa'),
     path('concluir/<int:tarefa_id>/', views.alternar_status, name='alternar_status'),
-    path('excluir/<int:tarefa_id>/', views.excluir_tarefa, name='excluir_tarefa'),
+    path('arquivar/<int:tarefa_id>/', views.arquivar_tarefa, name='arquivar_tarefa'),
+    path('arquivadas/', views.tarefas_arquivadas, name='tarefas_arquivadas'),
+    path('desarquivar/<int:tarefa_id>/', views.desarquivar_tarefa, name='desarquivar_tarefa'),
 ]

@@ -26,6 +26,7 @@ class Tarefa(models.Model):
     criado_em  = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     usuario    = models.ForeignKey(User, on_delete=models.CASCADE)
+    arquivada = models.BooleanField(default=False)
     historico    = HistoricalRecords()
 
     class Meta:

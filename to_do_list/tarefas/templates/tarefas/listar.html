@@ -20,6 +20,7 @@
             <button type="submit" class="btn">Sair</button>
         </form>
         <a href="{% url 'criar_tarefa' %}">Criar Nova Tarefa</a>
+        <a href="{% url 'tarefas_arquivadas' %}">Tarefas Arquivadas</a>
         <form method="get" hx-get="/" hx-target="#lista-tarefas" hx-trigger="change" class="filtros">
             <span class="filtros-titulo">Filtros</span>
             <div class="filtro-grupo">
@@ -51,6 +52,16 @@
         </div>
         </form>
         <div id="lista-tarefas">
+        <div class="paginacao">
+            {% if tarefas.has_previous %}
+                 <a href="?page={{ tarefas.previous_page_number }}" class="btn">Anterior</a>
+            {% endif %}
+
+            <span>Página {{tarefas.number}} de {{tarefas.paginator.num_pages}}</span>
+
+            {% if tarefas.has_next %}
+                <a href="?page={{ tarefas.next_page_number }}" class="btn">Próxima</a>
+            {% endif %}
             {% include 'tarefas/_lista_tarefas.html' %}
         </div>
     </div>
