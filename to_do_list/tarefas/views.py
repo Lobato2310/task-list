@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from to_do_list import tarefas
 from .models import Tarefa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -124,3 +126,20 @@ def desarquivar_tarefa(request, tarefa_id):
     tarefa.arquivada = False
     tarefa.save()
     return redirect('tarefas_arquivadas')
+
+@login_required
+def kanban_tarefas(request):
+    if request.user.is_superuser:
+        tarefas = Tarefa.objects.filter(arquivada=False)
+    elif request.user.is_staff:
+        tarefas = Tarefa.objects.filter(arquivada=False)
+    else:
+        tarefas = Tarefa.objects.filter(usuario=request.user, arquivada=False)
+    contexto = {
+        'a_fazer': tarefas.filter(status='a_fazer'),
+        'em_andamento': tarefas.filter(status='em_andamento'),
+        'em_revisao': tarefas.filter(status='em_revisao'),
+        'concluida': tarefas.filter(status='concluida'),
+        'cancelada': tarefas.filter(status='cancelada'),
+    }
+    return render(request, 'tarefas/kanban.html', contexto)
