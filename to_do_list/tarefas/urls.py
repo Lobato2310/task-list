@@ -12,4 +12,5 @@ urlpatterns = [
     path('arquivadas/', views.tarefas_arquivadas, name='tarefas_arquivadas'),
     path('desarquivar/<int:tarefa_id>/', views.desarquivar_tarefa, name='desarquivar_tarefa'),
     path('kanban/', views.kanban_tarefas, name='kanban_tarefas'),
+    path('tarefa/<int:tarefa_id>/', views.detalhes_tarefa, name='detalhes_tarefa'),
 ]

@@ -260,3 +260,70 @@ button.btn:hover {
     word-break: break-all;
     max-width: 100%;
 }
+
+.kanban-board {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+}
+
+.kanban-coluna {
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 200px;
+    flex: 1;
+}
+
+.kanban-coluna-titulo {
+    font-weight: bold;
+    color: var(--cor-texto);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--cor-primaria);
+}
+
+.tarefa-card {
+    background-color: var(--cor-fundo);
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--cor-primaria);
+}
+
+.tarefa-card h3 {
+    font-size: 0.9rem;
+    color: var(--cor-texto);
+    margin: 0 0 4px 0;
+}
+
+.tarefa-card p {
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+    margin: 0;
+}
+
+.nav-acoes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card-link {
+    text-decoration: none;
+    display: block;
+}
+
+.kanban-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.kanban-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

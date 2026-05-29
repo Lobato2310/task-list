@@ -19,9 +19,11 @@
             {% csrf_token %}
             <button type="submit" class="btn">Sair</button>
         </form>
-        <a href="{% url 'criar_tarefa' %}">Criar Nova Tarefa</a>
-        <a href="{% url 'tarefas_arquivadas' %}">Tarefas Arquivadas</a>
-        <a href="{% url 'kanban_tarefas' %}">Kanban</a>
+        <div class ="nav-acoes">
+        <a href="{% url 'criar_tarefa' %}" class="btn">Criar Nova Tarefa</a>
+        <a href="{% url 'tarefas_arquivadas' %}" class="btn">Tarefas Arquivadas</a>
+        <a href="{% url 'kanban_tarefas' %}" class="btn">Kanban</a>
+        </div>
         <form method="get" hx-get="/" hx-target="#lista-tarefas" hx-trigger="change" class="filtros">
             <span class="filtros-titulo">Filtros</span>
             <div class="filtro-grupo">

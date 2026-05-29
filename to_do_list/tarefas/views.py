@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
-from to_do_list import tarefas
 from .models import Tarefa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -143,3 +141,8 @@ def kanban_tarefas(request):
         'cancelada': tarefas.filter(status='cancelada'),
     }
     return render(request, 'tarefas/kanban.html', contexto)
+
+@login_required
+def detalhes_tarefa(request, tarefa_id):
+    tarefa = get_tarefa_por_perfil(request, tarefa_id)
+    return render(request, 'tarefas/detalhes.html', {'tarefa': tarefa})
