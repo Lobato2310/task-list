@@ -63,3 +63,4 @@ class Tarefa(models.Model):
         if self.prazo:
             return self.prazo < timezone.now().date()
         return False
+    

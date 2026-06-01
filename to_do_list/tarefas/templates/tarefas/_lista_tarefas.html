@@ -1,7 +1,7 @@
 <ul>
     {% for tarefa in tarefas %}
 
-        <li class="tarefa-item">
+        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">
 
             <div class="tarefa-header">
                 <p class="tarefa-titulo">Nome da Tarefa:  {{ tarefa.titulo }}</p>

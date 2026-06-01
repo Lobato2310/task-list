@@ -215,6 +215,7 @@ button.btn:hover {
     width: 100%;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .tarefa-titulo {
@@ -336,4 +337,16 @@ button.btn:hover {
 .prazo-urgente {
     color: var(--cor-warning);
     font-weight: bold;
+}
+
+.prioridade-baixa {
+    border-color: var(--cor-success);
+}
+
+.prioridade-media {
+    border-color: var(--cor-warning);
+}
+
+.prioridade-alta {
+    border-color: var(--cor-danger);
 }
