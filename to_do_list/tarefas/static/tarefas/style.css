@@ -327,3 +327,13 @@ button.btn:hover {
     align-items: center;
     margin-bottom: 20px;
 }
+
+.prazo-vencido {
+    color: var(--cor-danger);
+    font-weight: bold;
+}
+
+.prazo-urgente {
+    color: var(--cor-warning);
+    font-weight: bold;
+}

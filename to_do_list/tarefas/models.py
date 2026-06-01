@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from simple_history.models import HistoricalRecords
+from django.utils import timezone
+from datetime import timedelta
+
 
 class Tarefa(models.Model):
 
@@ -50,3 +53,13 @@ class Tarefa(models.Model):
             'cancelada':    [],
         }
         return fluxo.get(self.status, [])
+    
+    def prazo_urgente(self):
+        if self.prazo:
+            return self.prazo <= timezone.now().date() + timedelta(days=1)
+        return False
+    
+    def prazo_vencido(self):
+        if self.prazo:
+            return self.prazo < timezone.now().date()
+        return False

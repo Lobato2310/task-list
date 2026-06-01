@@ -12,7 +12,9 @@
             <div class="tarefa-info">
                 <span class="badge badge-{{ tarefa.status }}">Status: {{ tarefa.get_status_display }}</span>
                 <span class="badge badge-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</span>
-                <span class="tarefa-prazo">Prazo: {{ tarefa.prazo|date:"d/m/Y" }}</span>
+                <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
+                    Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
+                </span>
             </div>
 
             <div class="tarefa-acoes">

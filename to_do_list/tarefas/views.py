@@ -6,6 +6,8 @@ from django.contrib import messages
 from .forms import TarefaForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils import timezone
+
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
@@ -54,7 +56,7 @@ def listar_tarefas(request):
     tarefas = paginator.get_page(page_number)
     if request.headers.get('HX-Request'):
         return render(request, 'tarefas/_lista_tarefas.html', {'tarefas': tarefas})
-    return render(request, 'tarefas/listar.html', {'tarefas': tarefas})
+    return render(request, 'tarefas/listar.html', {'tarefas': tarefas, 'hoje': timezone.now().date()})
 
 
 @login_required
