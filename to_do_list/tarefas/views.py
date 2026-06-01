@@ -1,9 +1,9 @@
+from urllib import request
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Tarefa
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import TarefaForm
+from .forms import TarefaForm, CadastroForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils import timezone
@@ -20,12 +20,14 @@ def get_tarefa_por_perfil(request, tarefa_id):
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CadastroForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']
+            user.save()
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CadastroForm()
     return render(request, 'registration/cadastrar.html', {'form': form})
 
 @login_required
