@@ -350,3 +350,24 @@ button.btn:hover {
 .prioridade-alta {
     border-color: var(--cor-danger);
 }
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-acoes {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tarefa-acoes {
+        flex-wrap: wrap;
+    }
+}
