@@ -150,3 +150,4 @@ def kanban_tarefas(request):
 def detalhes_tarefa(request, tarefa_id):
     tarefa = get_tarefa_por_perfil(request, tarefa_id)
     return render(request, 'tarefas/detalhes.html', {'tarefa': tarefa})
+"""coment"""
