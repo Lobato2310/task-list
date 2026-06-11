@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Inicio Criar Tarefa</title>
+</head>
+<body>
+    <div class="container">
+    <h1>{% if form.instance.pk %}Editar Tarefa{% else %}Nova Tarefa{% endif %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn-submit" type="submit">Salvar</button>
+    <a class="btn btn-voltar" href="{% url 'listar_tarefas' %}">Voltar</a>
+</form>
+    </div>
+</body>
+</html>
