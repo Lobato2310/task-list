@@ -1,0 +1,14 @@
+*.sqlite3
+venv/
+__pycache__/
+
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.pot
+
+.env
+
+migrations/
+settings.py
