@@ -23,10 +23,7 @@
         <a href="{% url 'criar_tarefa' %}" class="btn">Criar Nova Tarefa</a>
         <a href="{% url 'tarefas_arquivadas' %}" class="btn">Tarefas Arquivadas</a>
         <a href="{% url 'kanban_tarefas' %}" class="btn">Kanban</a>
-        {% if request.user.is_staff or request.user.is_superuser %}
-            <p>Superuser: {{ request.user.is_superuser }}</p>
-            <p>Staff: {{ request.user.is_staff }}</p>
-            <a href="{% url 'dashboard.html' %}" class="btn">Dashboard</a>
+        <a href="{% url 'dashboard_html' %}" class="btn">Dashboard</a>
         {% endif %}
         </div>
         <form method="get" class="filtros">

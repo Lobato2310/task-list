@@ -13,5 +13,5 @@ urlpatterns = [
     path('desarquivar/<int:tarefa_id>/', views.desarquivar_tarefa, name='desarquivar_tarefa'),
     path('kanban/', views.kanban_tarefas, name='kanban_tarefas'),
     path('tarefa/<int:tarefa_id>/', views.detalhes_tarefa, name='detalhes_tarefa'),
-    path('dashboard/', views.dashboard, name='dashboard.html'),
+    path('dashboard/', views.dashboard, name='dashboard_html'),
 ]
