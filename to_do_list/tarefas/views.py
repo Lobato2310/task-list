@@ -4,9 +4,23 @@ from .models import Tarefa
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import TarefaForm, CadastroForm
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.contrib.admin.views.decorators import staff_member_required
+
+
+import plotly.express as px 
+import plotly.io as pio
+
+
+
+@staff_member_required
+def dashboard(request):
+    dados = Tarefa.objects.values('status').annotate(total=Count('id'))
+    fig = px.pie(dados, values='total', names='status')
+    grafico_html = pio.to_html(fig, full_html=False)
+    return render(request, 'dashboard.html', {'grafico' : grafico_html})
 
 
 def get_tarefa_por_perfil(request, tarefa_id):
