@@ -9,6 +9,16 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 
 
+
+def dashboard(request):
+    dados = Tarefa.objects.values('status').annotate(total=Count('id'))
+    fig = px.pie(dados, values='total', names='status')
+    grafico_html = pio.to_html(fig, full_html=False)
+    return render(request, 'dashboard', {'grafico' : grafico_html})
+
+
+
+
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
         tarefa = get_object_or_404(Tarefa, id=tarefa_id)
