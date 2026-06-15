@@ -30,8 +30,12 @@ def dashboard(request):
         dados_linha_tempo = dados_linha_tempo.filter(criado_em__date__lte=data_fim)
     grafico_linha_arg = px.line(dados_linha_tempo, x='dia', y='total')
     grafico_linha = pio.to_html(grafico_linha_arg, full_html=False)
+    dados_conc_vencida = Tarefa.objects.values('status').filter(status__in=['concluida', 'cancelada']).filter(data_conclusao__gt=F('prazo')).annotate(total=Count('id'))
+    grafico_vencimento = px.bar(dados_conc_vencida, x='status', y='total')
+    
     return render(request, 'tarefas/dashboard.html', {'grafico_status' : grafico_status,
-                                                      'grafico_timeline' : grafico_linha})
+                                                      'grafico_timeline' : grafico_linha,
+                                                      'grafico_vencido' : grafico_vencimento})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
