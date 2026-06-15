@@ -4,20 +4,23 @@ from .models import Tarefa
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import TarefaForm, CadastroForm
-from django.db.models import Q
+from django.db.models import Q, Count, F
 from django.core.paginator import Paginator
 from django.utils import timezone
 import plotly.express as px
 import plotly.io as pio
 from django.contrib.admin.views.decorators import staff_member_required
+from datetime import timezone
 
 
 @staff_member_required
 def dashboard(request):
-    dados = Tarefa.objects.values('status').annotate(total=Count('id'))
-    fig = px.pie(dados, values='total', names='status')
-    grafico_html = pio.to_html(fig, full_html=False)
-    return render(request, 'dashboard.html', {'grafico' : grafico_html})
+    dados_pizza = Tarefa.objects.values('status').annotate(total=Count('id'))
+    grafico_1 = px.pie(dados_pizza, values='total', names='status')
+    grafico_pizza = pio.to_html(grafico_1, full_html=False)
+    
+    
+    return render(request, 'tarefas/dashboard.html', {'grafico' : grafico_pizza})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
@@ -103,6 +106,8 @@ def alternar_status(request, tarefa_id):
     novo_status = request.POST.get('novo_status')  
     if novo_status in tarefa.mudanca_status():
         tarefa.status = novo_status
+        if novo_status in ['concluida', 'cancelada']:
+            tarefa.data_conclusao = timezone.now()
         tarefa.save()
     else:
         messages.error(request, 'Transição de status não permitida.')

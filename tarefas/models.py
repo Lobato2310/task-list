@@ -28,6 +28,7 @@ class Tarefa(models.Model):
     prazo      = models.DateField(null=True, blank=True, verbose_name='Prazo')
     criado_em  = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    data_conclusao = models.DateTimeField(null=True, blank=True)
     usuario    = models.ForeignKey(User, on_delete=models.CASCADE)
     arquivada = models.BooleanField(default=False)
     historico    = HistoricalRecords()
