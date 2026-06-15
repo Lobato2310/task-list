@@ -23,6 +23,9 @@
         <a href="{% url 'criar_tarefa' %}" class="btn">Criar Nova Tarefa</a>
         <a href="{% url 'tarefas_arquivadas' %}" class="btn">Tarefas Arquivadas</a>
         <a href="{% url 'kanban_tarefas' %}" class="btn">Kanban</a>
+        {% if request.user.is_staff or request.user.is_superuser %}
+            <a href="{% url 'dashboard' %}" class="btn">Dashboard</a>
+        {% endif %}
         </div>
         <form method="get" hx-get="/" hx-target="#lista-tarefas" hx-trigger="change" class="filtros">
             <span class="filtros-titulo">Filtros</span>

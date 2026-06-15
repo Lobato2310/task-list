@@ -7,17 +7,17 @@ from .forms import TarefaForm, CadastroForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils import timezone
+import plotly.express as px
+import plotly.io as pio
+from django.contrib.admin.views.decorators import staff_member_required
 
 
-
+@staff_member_required
 def dashboard(request):
     dados = Tarefa.objects.values('status').annotate(total=Count('id'))
     fig = px.pie(dados, values='total', names='status')
     grafico_html = pio.to_html(fig, full_html=False)
-    return render(request, 'dashboard', {'grafico' : grafico_html})
-
-
-
+    return render(request, 'dashboard.html', {'grafico' : grafico_html})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
