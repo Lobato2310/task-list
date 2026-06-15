@@ -11,16 +11,27 @@ import plotly.express as px
 import plotly.io as pio
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import timezone
+from django.db.models.functions import TruncDay
+
 
 
 @staff_member_required
 def dashboard(request):
-    dados_pizza = Tarefa.objects.values('status').annotate(total=Count('id'))
-    grafico_1 = px.pie(dados_pizza, values='total', names='status')
-    grafico_pizza = pio.to_html(grafico_1, full_html=False)
-    
-    
-    return render(request, 'tarefas/dashboard.html', {'grafico' : grafico_pizza})
+    data_inicio = request.GET.get('data_inicio')
+    data_fim = request.GET.get('data_fim')
+    dados_status = Tarefa.objects.values('status').annotate(total=Count('id'))
+    grafico_pizza = px.pie(dados_status, values='total', names='status')
+    grafico_status = pio.to_html(grafico_pizza, full_html=False)
+    dados_linha_tempo = Tarefa.objects.annotate(
+        dia=TruncDay('criado_em')).values('dia').annotate(total=Count('id'))
+    if data_inicio:
+        dados_linha_tempo = dados_linha_tempo.filter(criado_em__date__gte=data_inicio)
+    if data_fim:
+        dados_linha_tempo = dados_linha_tempo.filter(criado_em__date__lte=data_fim)
+    grafico_linha_arg = px.line(dados_linha_tempo, x='dia', y='total')
+    grafico_linha = pio.to_html(grafico_linha_arg, full_html=False)
+    return render(request, 'tarefas/dashboard.html', {'grafico_status' : grafico_status,
+                                                      'grafico_timeline' : grafico_linha})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
