@@ -156,9 +156,9 @@ a.btn.btn-danger:hover {
 }
 
 button.btn {
-    background-color: var(--cor-primaria); /* cor do botao atualizar status */
+    background-color: var(--cor-fundo); /* cor do botao atualizar status */
     display: inline-block;
-    color: var(--cor-fundo);
+    color: var(--cor-texto);
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
@@ -168,7 +168,7 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #e2e2e2; /* cor ao passar por cima */
+    background-color: var(--cor-superficie); /* cor ao passar por cima */
 }
 
 .badge {
@@ -206,7 +206,7 @@ button.btn:hover {
 
 .tarefa-item {
     background-color: var(--cor-texto-suave); /* cor de fundo dos cards */
-    border: 1.5px solid var(--cor-fundo); /* cor de borda do card arquivado */
+    border: 2px solid var(--cor-superficie); /* cor de borda do card arquivado */
     padding: 11px;
     margin-bottom: 11px;
     border-radius: 5px;
@@ -223,13 +223,13 @@ button.btn:hover {
 .tarefa-titulo {
     font-size: 1rem;
     font-weight: bold;
-    color: var(--cor-fundo); /* cor do titulo da tarefa */
+    color: var(--cor-superficie); /* cor do titulo da tarefa */
     margin: 0;
 }
 
 .tarefa-responsavel {
-    font-size: 0.8rem;
-    color: var(--cor-fundo);
+    font-size: 1rem;
+    color: var(--cor-superficie);
     margin: 4px 0 0 0;
 }
 
@@ -242,7 +242,7 @@ button.btn:hover {
 
 .tarefa-prazo {
     font-size: 0.8rem;
-    color: var(--cor-fundo);
+    color: var(--cor-superficie);
 }
 
 .tarefa-acoes {
@@ -257,8 +257,8 @@ button.btn:hover {
 }
 
 .tarefa-descricao {
-    font-size: 0.85rem;
-    color: var(--cor-fundo);
+    font-size: 1rem;
+    color: var(--cor-superficie);
     margin-top: 6px;
     word-break: break-all;
     max-width: 100%;
@@ -272,7 +272,7 @@ button.btn:hover {
 }
 
 .kanban-coluna {
-    background-color: var(--cor-fundo); /* fundo das colunas kanban */
+    background-color: var(--cor-texto-suave); /* fundo das colunas kanban */
     border-radius: 8px;
     padding: 12px;
     min-width: 200px;
@@ -281,29 +281,29 @@ button.btn:hover {
 
 .kanban-coluna-titulo {
     font-weight: bold;
-    color: var(--cor-texto); /* titulos do kanban */
+    color: var(--cor-superficie); /* titulos do kanban */
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--cor-texto); /* separador do titulo para tarefas */
+    border-bottom: 2px solid var(--cor-superficie); /* separador do titulo para tarefas */
 }
 
 .tarefa-card {
-    background-color: var(--cor-texto-suave); /*car da tarefa do kanban fundo */
+    background-color: var(--cor-fundo); /*cor da tarefa do kanban fundo */
     border-radius: 6px;
     padding: 10px;
     margin-bottom: 8px;
-    border-left: 4px solid var(--cor-texto); /* borda da esquerda do card no kanban */
+    border-left: 4px solid var(--cor-superficie); /* borda da esquerda do card no kanban */
 } 
 
 .tarefa-card h3 {
     font-size: 0.9rem;
-    color: var(--cor-texto); /* titulo da tarefa no kanban */
+    color: var(--cor-superficie); /* titulo da tarefa no kanban */
     margin: 0 0 4px 0;
 }
 
 .tarefa-card p {
     font-size: 0.8rem;
-    color: var(--cor-texto);
+    color: var(--cor-superficie);
     margin: 0;
 }
 
@@ -397,7 +397,7 @@ textarea {
     }
 
     .grafico-card {
-    background-color: var(--cor-texto); /* cor de fundo do card do grafico */
+    background-color: var(--cor-texto-suave); /* cor de fundo do card do grafico */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 24px;
@@ -405,11 +405,11 @@ textarea {
 }
 
 .grafico-card h2 {
-    color: var(--cor-fundo); /* titulo card graficos */
+    color: var(--cor-superficie); /* titulo card graficos */
     font-size: 1rem;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--cor-fundo);
+    border-bottom: 2px solid var(--cor-superficie);
 }
 
 .texto-suave {
@@ -448,7 +448,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--cor-fundo); /*borda do car pro titulo pra baixo */
+    border-bottom: 2px solid var(--cor-superficie); /*borda do car pro titulo pra baixo */
 }
 
 .paginacao {
