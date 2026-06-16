@@ -26,7 +26,7 @@ def dashboard(request):
         'cancelada': 'Cancelada',
     }
     dados_status = list(Tarefa.objects.values('status').annotate(total=Count('id')))
-    print(dados_status)
+    print('Antes', dados_status)
     for item in dados_status:
         item['status'] = mapa_status.get(item['status'], item['status'])
     if dados_status:

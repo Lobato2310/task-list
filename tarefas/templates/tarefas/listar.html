@@ -19,14 +19,16 @@
             {% csrf_token %}
             <button type="submit" class="btn">Sair</button>
         </form>
-        <div class ="nav-acoes">
-        <a href="{% url 'criar_tarefa' %}" class="btn">Criar Nova Tarefa</a>
-        <a href="{% url 'tarefas_arquivadas' %}" class="btn">Tarefas Arquivadas</a>
-        <a href="{% url 'kanban_tarefas' %}" class="btn">Kanban</a>
-        {% if request.user.is_staff or request.user.is_superuser %}
-            <a href="{% url 'dashboard' %}" class="btn">Dashboard</a>
-        {% endif %}
-        </div>
+        <div class="layout">
+            <aside class="sidebar">
+            <div class ="nav-acoes">
+            <a href="{% url 'criar_tarefa' %}" class="btn">Criar Nova Tarefa</a>
+            <a href="{% url 'tarefas_arquivadas' %}" class="btn">Tarefas Arquivadas</a>
+            <a href="{% url 'kanban_tarefas' %}" class="btn">Kanban</a>
+            {% if request.user.is_staff or request.user.is_superuser %}
+                <a href="{% url 'dashboard' %}" class="btn">Dashboard</a>
+            {% endif %}
+    </div>
         <form method="get" hx-get="/" hx-target="#lista-tarefas" hx-trigger="change" class="filtros">
             <span class="filtros-titulo">Filtros</span>
             <div class="filtro-grupo">
@@ -52,11 +54,14 @@
         <div class="filtro-grupo">
             <label for="prazo">Prazo:</label>
             <input type="date" name="prazo" id="prazo">
+        </div>
         <div class="filtro-grupo">
             <label for="busca">Buscar</label>
             <input type="text" name="busca" id="busca" placeholder="Titulo ou descrição">
         </div>
         </form>
+            </aside>
+            <main class="conteudo">
         <div id="lista-tarefas">
         <div class="paginacao">
             {% if tarefas.has_previous %}
@@ -71,5 +76,8 @@
             {% include 'tarefas/_lista_tarefas.html' %}
         </div>
     </div>
+        </main>
+    </div>
+</div>
 </body>
 </html>
