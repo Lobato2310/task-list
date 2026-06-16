@@ -8,17 +8,18 @@
     <title>Minhas Tarefas</title>
 </head>
 <body>
-    <div class="container">
         {% if messages %}
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}    
         {% endif %}
+    <div class="header">
         <h1>Minhas Tarefas</h1>
         <form method='post' action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn">Sair</button>
         </form>
+    </div>
         <div class="layout">
             <aside class="sidebar">
             <div class ="nav-acoes">
@@ -63,21 +64,18 @@
             </aside>
             <main class="conteudo">
         <div id="lista-tarefas">
+            {% include 'tarefas/_lista_tarefas.html' %}
+        </div>
         <div class="paginacao">
             {% if tarefas.has_previous %}
                  <a href="?page={{ tarefas.previous_page_number }}" class="btn">Anterior</a>
             {% endif %}
-
             <span>Página {{tarefas.number}} de {{tarefas.paginator.num_pages}}</span>
-
             {% if tarefas.has_next %}
                 <a href="?page={{ tarefas.next_page_number }}" class="btn">Próxima</a>
             {% endif %}
-            {% include 'tarefas/_lista_tarefas.html' %}
         </div>
-    </div>
         </main>
     </div>
-</div>
 </body>
 </html>
