@@ -413,7 +413,7 @@ textarea {
 
 .texto-suave {
     font-size: 0.8rem;
-    color: var(--cor-texto-suave);
+    color: var(--cor-texto);
     margin-top: -10px;
     margin-bottom: 10px;
 }
