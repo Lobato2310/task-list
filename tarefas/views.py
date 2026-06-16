@@ -32,10 +32,12 @@ def dashboard(request):
     grafico_linha = pio.to_html(grafico_linha_arg, full_html=False)
     dados_conc_vencida = Tarefa.objects.values('status').filter(status__in=['concluida', 'cancelada']).filter(data_conclusao__gt=F('prazo')).annotate(total=Count('id'))
     grafico_vencimento = px.bar(dados_conc_vencida, x='status', y='total')
+    grafico_vencido_html = pio.to_html(grafico_vencimento, full_html=False)
+
     
     return render(request, 'tarefas/dashboard.html', {'grafico_status' : grafico_status,
                                                       'grafico_timeline' : grafico_linha,
-                                                      'grafico_vencido' : grafico_vencimento})
+                                                      'grafico_vencido' : grafico_vencido_html})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:
