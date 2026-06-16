@@ -10,7 +10,6 @@ from django.utils import timezone
 import plotly.express as px
 import plotly.io as pio
 from django.contrib.admin.views.decorators import staff_member_required
-from datetime import timezone
 from django.db.models.functions import TruncDay
 
 
@@ -19,25 +18,46 @@ from django.db.models.functions import TruncDay
 def dashboard(request):
     data_inicio = request.GET.get('data_inicio')
     data_fim = request.GET.get('data_fim')
-    dados_status = Tarefa.objects.values('status').annotate(total=Count('id'))
-    grafico_pizza = px.pie(dados_status, values='total', names='status')
-    grafico_status = pio.to_html(grafico_pizza, full_html=False)
-    dados_linha_tempo = Tarefa.objects.annotate(
-        dia=TruncDay('criado_em')).values('dia').annotate(total=Count('id'))
+    mapa_status = {
+        'a_fazer': 'A Fazer',
+        'em_andamento': 'Em Andamento',
+        'em_revisao': 'Em Revisão',
+        'concluida': 'Concluída',
+        'cancelada': 'Cancelada',
+    }
+    dados_status = list(Tarefa.objects.values('status').annotate(total=Count('id')))
+    print(dados_status)
+    for item in dados_status:
+        item['status'] = mapa_status.get(item['status'], item['status'])
+    if dados_status:
+        grafico_pizza = px.pie(dados_status, values='total', names='status')
+        grafico_status_html = pio.to_html(grafico_pizza, full_html=False)
+    else:
+        grafico_status_html = '<p>Nenhuma Tarefa a mostrar.</p>'
+    dados_qtde = list(Tarefa.objects.annotate(dia=TruncDay('criado_em')).values('dia').annotate(total=Count('id')))
     if data_inicio:
-        dados_linha_tempo = dados_linha_tempo.filter(criado_em__date__gte=data_inicio)
+        dados_qtde = dados_qtde.filter(criado_em__date__gte=data_inicio)
     if data_fim:
-        dados_linha_tempo = dados_linha_tempo.filter(criado_em__date__lte=data_fim)
-    grafico_linha_arg = px.line(dados_linha_tempo, x='dia', y='total')
-    grafico_linha = pio.to_html(grafico_linha_arg, full_html=False)
-    dados_conc_vencida = Tarefa.objects.values('status').filter(status__in=['concluida', 'cancelada']).filter(data_conclusao__gt=F('prazo')).annotate(total=Count('id'))
-    grafico_vencimento = px.bar(dados_conc_vencida, x='status', y='total')
-    grafico_vencido_html = pio.to_html(grafico_vencimento, full_html=False)
-
-    
-    return render(request, 'tarefas/dashboard.html', {'grafico_status' : grafico_status,
-                                                      'grafico_timeline' : grafico_linha,
-                                                      'grafico_vencido' : grafico_vencido_html})
+        dados_qtde = dados_qtde.filter(criado_em__date__lte=data_fim)
+    if dados_qtde:
+        grafico_linha_arg = px.line(dados_qtde, x='dia', y='total', labels={'usuario__username': 'Usuário'})
+        grafico_linha_html = pio.to_html(grafico_linha_arg, full_html=False)
+    else: grafico_linha_html = '<p>Nenhuma tarefa para este gráfico.</p>'
+    dados_conc_vencida = list(Tarefa.objects.values('status').filter(status__in=['concluida', 'cancelada']).filter(data_conclusao__gt=F('prazo')).annotate(total=Count('id')))
+    if dados_conc_vencida:
+        grafico_barra = px.bar(dados_conc_vencida, x='status', y='total')
+        grafico_vencido_html = pio.to_html(grafico_barra, full_html=False)
+    else:
+        grafico_vencido_html = '<p>Nenhuma tarefa concluída ou cancelada após o prazo.</p>'
+    dados_usuario = Tarefa.objects.values('usuario__username').annotate(total=Count('id'))
+    if dados_usuario:
+        grafico_barra2 = px.bar(dados_usuario, x='usuario__username', y='total', labels={'usuario__username': 'Usuário'})
+        grafico_usuario_html = pio.to_html(grafico_barra2, full_html=False)
+    else:'<p>Nenhuma tarefa a mostrar.</p>'
+    return render(request, 'tarefas/dashboard.html', {'grafico_status' : grafico_status_html,
+                                                      'grafico_timeline' : grafico_linha_html,
+                                                      'grafico_vencido' : grafico_vencido_html,
+                                                      'grafico_usuario' : grafico_usuario_html})
 
 def get_tarefa_por_perfil(request, tarefa_id):
     if request.user.is_superuser:

@@ -393,3 +393,19 @@ textarea {
     .tarefa-acoes {
         flex-wrap: wrap;
     }
+
+    .grafico-card {
+    background-color: var(--cor-superficie);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.grafico-card h2 {
+    color: var(--cor-texto);
+    font-size: 1rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--cor-primaria);
+}

@@ -2,14 +2,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="{% static 'tarefas/style.css'}">
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
     <meta charset="UTF-8">
     <title>Dashboard</title>
 </head>
 <body>
     <div class="container">
         <h1>Dashboard</h1>
-            {{ grafico|safe }}
+        <div class="grafico-card">
+            <h2>Tarefas por Status</h2>
+            {{ grafico_status|safe }}
+        </div>
+
+        <div class="grafico-card">
+            <h2>Linha Temporal</h2>
+            {{ grafico_timeline|safe }}
+        </div>
+
+        <div class="grafico-card">
+            <h2>Concluídas/Canceladas após Prazo</h2>
+            {{ grafico_vencido|safe }}
+        </div>
+
+        <div class="grafico-card">
+            <h2>Tarefas por Usuário</h2>
+            {{ grafico_usuario|safe }}
+        </div>
             <a href="{% url 'listar_tarefas' %}"
 class="btn">Voltar</a>
         <div id="meu-grafico-pizza"></div>
