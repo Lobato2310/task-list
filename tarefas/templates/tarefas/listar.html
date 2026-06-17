@@ -17,7 +17,7 @@
         <h1>Minhas Tarefas</h1>
         <form method='post' action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" class="btn">Sair</button>
+            <button type="submit" class="btn-sair">Sair</button>
         </form>
     </div>
         <div class="layout">
@@ -68,11 +68,11 @@
         </div>
         <div class="paginacao">
             {% if tarefas.has_previous %}
-                 <a href="?page={{ tarefas.previous_page_number }}" class="btn">Anterior</a>
+                 <a href="?page={{ tarefas.previous_page_number }}" class="btn-anterior">Anterior</a>
             {% endif %}
             <span>Página {{tarefas.number}} de {{tarefas.paginator.num_pages}}</span>
             {% if tarefas.has_next %}
-                <a href="?page={{ tarefas.next_page_number }}" class="btn">Próxima</a>
+                <a href="?page={{ tarefas.next_page_number }}" class="btn-proxima">Próxima</a>
             {% endif %}
         </div>
         </main>

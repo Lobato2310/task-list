@@ -7,7 +7,7 @@
     <title>Inicio Criar Tarefa</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container-form">
     <h1>{% if form.instance.pk %}Editar Tarefa{% else %}Nova Tarefa{% endif %}</h1>
 <form method="POST">
     {% csrf_token %}

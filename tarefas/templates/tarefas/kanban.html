@@ -93,10 +93,10 @@
         </div>
     </div>
     <div class="kanban-nav">
-        <a class="btn" href="{% url 'listar_tarefas' %}">Voltar para Lista</a>
+        <a class="btn-sair" href="{% url 'listar_tarefas' %}">Voltar para Lista</a>
          <form method='post' action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" class="btn">Sair</button>
+            <button type="submit" class="btn-sair">Sair</button>
         </form>
     </div>
 </body>

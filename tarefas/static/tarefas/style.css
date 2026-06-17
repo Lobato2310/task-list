@@ -109,7 +109,7 @@ h1 {
 }
 
 a[href] {
-    color: var(--cor-superficie); /* esqueci a senha, cadastre-se */
+    color: var(--cor-superficie); /* esqu.aeci a senha, cadastre-se */
     text-decoration: underline;
 }
 
@@ -148,7 +148,7 @@ a[href] {
 }
 
 a.btn.btn-danger {
-    background-color: var(--cor-danger);
+    background-color: var(--cor-danger); /* cor do botão arquivar */
 }
 
 a.btn.btn-danger:hover {
@@ -158,7 +158,7 @@ a.btn.btn-danger:hover {
 button.btn {
     background-color: var(--cor-fundo); /* cor do botao atualizar status */
     display: inline-block;
-    color: var(--cor-texto);
+    color: var(--cor-superficie); /* cor do texto do btn */
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
@@ -229,7 +229,7 @@ button.btn:hover {
 
 .tarefa-responsavel {
     font-size: 1rem;
-    color: var(--cor-superficie);
+    color: var(--cor-superficie); /* cor responsavel */
     margin: 4px 0 0 0;
 }
 
@@ -452,6 +452,7 @@ textarea {
 }
 
 .paginacao {
+    background-color: var(--cor-texto-suave);
     display: flex;
     justify-content: flex-end;
     padding: 16px;
@@ -463,3 +464,58 @@ textarea {
     overflow-y: auto; 
 }
 
+.btn-sair {
+    background-color: var(--cor-texto-suave);
+    color: var(--cor-superficie);
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.btn-proxima {
+    background-color: var(--cor-fundo);
+    color: var(--cor-superficie);
+    padding: 6px 13px;
+    border-radius: 2px;
+}
+
+.btn-anterior {
+    background-color: var(--cor-fundo);
+    color: var(--cor-superficie);
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.btn-editar {
+    background-color: var(--cor-fundo);
+    color: var(--cor-superficie);
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+a.btn-sair {
+    background-color: var(--cor-texto-suave);
+    color: var(--cor-superficie);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+a.btn.btn-voltar {
+    background-color: var(--cor-texto-suave); /* btn submit do editar tarefa */
+    display: inline-block;
+    color: var(--cor-superficie);
+    padding: 6px 11px;
+    text-decoration: none;
+    border-radius: 1px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.container-form {
+    max-width: 600px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--cor-texto-suave);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
