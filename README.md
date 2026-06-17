@@ -2,17 +2,22 @@
 
 > Sistema corporativo de gestão de tarefas desenvolvido em Django
 
+---
+
 ### 🛠️ Tecnologias Usadas
 
-As seguintes ferramentas, linguagens e bibliotecas foram utilizadas no desenvolvimento do projeto:
-
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.14-blue)
-![Django](https://img.shields.io/badge/Django-6.0.5-green)
+![Python](https://img.shields.io/badge/Python-3.14-blue?style=for-the-badge)
+![Django](https://img.shields.io/badge/Django-6.0.5-green?style=for-the-badge)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![HTMX](https://img.shields.io/badge/HTMX-1.9.10-blue?style=for-the-badge)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![HTMX](https://img.shields.io/badge/HTMX-1.9.10-blue?style=for-the-badge)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-6.8.0-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-3.0.3-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![django--simple--history](https://img.shields.io/badge/django--simple--history-3.11.0-092E20?style=for-the-badge)
+
+---
 
 ## ✨ Funcionalidades
 
@@ -27,16 +32,17 @@ As seguintes ferramentas, linguagens e bibliotecas foram utilizadas no desenvolv
 |--------|-------------|------------|
 | Colaborador | `is_active` | Gerencia apenas suas próprias tarefas |
 | Gestor | `is_staff` | Visualiza todas as tarefas |
-| Admin | `is_superuser` | Acesso total + histórico de alterações |
+| Admin | `is_superuser` | Acesso total + histórico de alterações + dashboard |
 
 ### 📋 Gestão de Tarefas
 - ✅ Criar, editar e arquivar tarefas
 - ✅ Controle de status com fluxo definido
 - ✅ Prioridade com destaque visual por cor
-- ✅ Prazo com alertas automáticos
+- ✅ Prazo com alertas automáticos de vencimento
 - ✅ Busca por título e descrição
 - ✅ Filtros por status, prioridade e prazo
 - ✅ Paginação de 5 em 5 tarefas
+- ✅ Isolamento de dados por usuário — cada um vê apenas suas tarefas
 
 ### 🚦 Fluxo de Status
 ```mermaid
@@ -49,16 +55,26 @@ graph LR
     B --> E
 ```
 
-
 ### 📊 Visualizações
 - ✅ Lista com filtros e busca em tempo real via HTMX
-- ✅ Kanban por colunas com cards clicáveis
+- ✅ Kanban por colunas com cards clicáveis e detalhes da tarefa
+- ✅ Layout moderno com sidebar de filtros e área de conteúdo separadas
 - ✅ Responsivo — mobile, tablet e desktop
 
 ### 🗄️ Arquivamento e Auditoria
 - ✅ Tarefas concluídas e canceladas só podem ser arquivadas
-- ✅ Histórico completo de alterações por usuário
+- ✅ Histórico completo de alterações por usuário via `django-simple-history`
 - ✅ Histórico preservado mesmo após arquivamento
+- ✅ Data de conclusão registrada automaticamente ao concluir ou cancelar
+
+### 📈 Dashboard Gerencial *(acesso restrito a Gestores e Admins)*
+- ✅ Gráfico de pizza — distribuição de tarefas por status
+- ✅ Gráfico de linha — linha temporal de criação de tarefas com filtro por período
+- ✅ Gráfico de barras — tarefas concluídas ou canceladas após o vencimento do prazo
+- ✅ Gráfico de barras — total de tarefas por usuário
+- ✅ Visão histórica completa incluindo tarefas arquivadas
+
+---
 
 ## 🚀 Como Rodar Localmente
 
@@ -98,7 +114,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-**6. Criar superuser**
+**6. Criar superusuário**
 ```bash
 python manage.py createsuperuser
 ```
@@ -110,6 +126,8 @@ python manage.py runserver
 
 Acesse: http://127.0.0.1:8000
 
+---
+
 ## 🗺️ Roadmap
 
 | Fase | Versão | Status | Entregas |
@@ -117,13 +135,16 @@ Acesse: http://127.0.0.1:8000
 | 1 | MVP | ✅ Concluído | CRUD de tarefas básico |
 | 2 | v1.0 | ✅ Concluído | Login, perfis de acesso, status e prioridade |
 | 3 | v1.5 | ✅ Concluído | Kanban, filtros, busca, paginação, integração de e-mail |
+| 4 | v2.0 | ✅ Concluído | Dashboard gerencial com gráficos interativos via Plotly |
 
-### 🔜 Melhorias Futuras Em Planejamento — v2.0
-- [ ] Dashboard com métricas gerenciais
+### 🔜 Melhorias Futuras — v2.5
 - [ ] Relatórios por usuário e por status
 - [ ] Exportação de tarefas em CSV
+- [ ] Notificações automáticas de prazo por e-mail
 - [ ] Troca de banco de dados para PostgreSQL em produção
 - [ ] App Mobile
+
+---
 
 ## 👨‍💻 Autor
 
