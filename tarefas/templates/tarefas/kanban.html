@@ -18,7 +18,7 @@
                 <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
                     <div class="tarefa-card">
                         <h3>{{ tarefa.titulo }}</h3>
-                        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
+                        <li class="tarefa-item-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
                         <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
                             Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
                         </span>
@@ -34,7 +34,7 @@
                 <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
                     <div class="tarefa-card">
                         <h3>{{ tarefa.titulo }}</h3>
-                        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
+                        <li class="tarefa-item-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
                         <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
                             Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
                         </span>
@@ -50,7 +50,7 @@
                 <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
                     <div class="tarefa-card">
                         <h3>{{ tarefa.titulo }}</h3>
-                        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
+                        <li class="tarefa-item-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
                         <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
                             Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
                         </span>
@@ -66,7 +66,7 @@
                 <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
                     <div class="tarefa-card">
                         <h3>{{ tarefa.titulo }}</h3>
-                        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
+                        <li class="tarefa-item-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
                         <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
                             Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
                         </span>
@@ -82,7 +82,7 @@
                 <a href="{% url 'detalhes_tarefa' tarefa.id %}" class="card-link">
                     <div class="tarefa-card">
                         <h3>{{ tarefa.titulo }}</h3>
-                        <li class="tarefa-item prioridade-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
+                        <li class="tarefa-item-{{ tarefa.prioridade }}">Prioridade: {{ tarefa.get_prioridade_display }}</li>
                         <span class="{% if tarefa.prazo_vencido %}prazo-vencido{% elif tarefa.prazo_urgente %}prazo-urgente{% endif %}">
                             Prazo: {{ tarefa.prazo|date:"d/m/Y" }}
                         </span>

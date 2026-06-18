@@ -1,24 +1,23 @@
 :root{
-    --cor-fundo:         #4682B4;
-    --cor-superficie:    #1E293B;
-    --cor-primaria:      #5776a5;
-    --cor-texto:         #F8FAFC;
-    --cor-texto-suave:   #d2d6d9;
-    --cor-borda:         #334155;
-    --cor-danger:        #EF4444;
+    --cor-fundo-bordas:  #e3f2f8;
+    --cor-fundo-tarefas: #212529;
+    --cor-cards:         #cfcfcf;       ;
+    --cor-texto-um:      #5776a5;
+    --cor-texto-dois:    #F8FAFC;
+    --cor-btn-um:        #6c91ad;
+    --cor-btn-dois:      #334155;
     --cor-success:       #10B981;
-    --cor-warning:       #F59E0B;
-    --cor-a-fazer:       #64748B; 
+    --cor-a-fazer:       #f5f5f5; 
     --cor-em-andamento:  #0891B2;
     --cor-em-revisao:    #F59E0B;
     --cor-concluida:     #10B981;
-    --cor-cancelada:     #EF4444;
+    --cor-cancelada:     #eb8282;
     --cor-teste:         #fbff00;
 }
 
 body {
-    background-color: var(--cor-fundo); /* fundo pagina principal */
-    color: var(--cor-superficie); /* textos: Login-Não tem uma conta?-Usuário-Senha */ 
+    background-color: var(--cor-texto-dois); /* fundo pagina principal */
+    color: var(--cor-btn-dois); /* texto: não tem uma conta? */ 
     font-family: 'Segoe UI', sans-serif;
     min-height: 100vh
 }
@@ -34,8 +33,8 @@ body {
 }
 
 .tarefa-item {
-    background-color: var(--cor-superficie);
-    border-left: 5px solid var(--cor-superficie);
+    background-color: var(--cor-btn-dois);
+    border-left: 5px solid var(--cor-btn-dois);
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 4px;
@@ -46,9 +45,9 @@ body {
 }
 
 a.btn {
-    background-color: var(--cor-texto-suave); /* Fundo dos btn ações acima do filtro e btns editar */
+    background-color: var(--cor-texto-dois); /* Fundo dos btn ações acima do filtro e btns editar */
     display: inline-block;
-    color: var(--cor-texto-suave);
+    color: var(--cor-btn-dois);
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
@@ -57,7 +56,7 @@ a.btn {
 }
 
 a.btn:hover {
-    background-color: var(--cor-superficie); /* cor que estiliza o botao quando o mouse esta em cima */
+    background-color: var(--cor-cards); /* cor que estiliza o botao quando o mouse esta em cima */
 }
 
 .concluida {
@@ -87,9 +86,9 @@ h1 {
 }
 
 .btn-submit {
-    background-color: var(--cor-texto-suave); /* btn submit do editar tarefa */
+    background-color: var(--cor-texto-dois); /* btn submit do editar tarefa */
     display: inline-block;
-    color: var(--cor-superficie);
+    color: var(--cor-btn-dois);
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 0px;
@@ -97,10 +96,11 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+
 .btn-voltar {
-    background-color: var(--cor-superficie);
+    background-color: var(--cor-btn-um);
     display: inline-block;
-    color: var(--cor-texto);
+    color: var(--cor-texto-dois);
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
@@ -109,7 +109,7 @@ h1 {
 }
 
 a[href] {
-    color: var(--cor-superficie); /* esqu.aeci a senha, cadastre-se */
+    color: var(--cor-btn-dois); /* esqueci a senha, cadastre-se */
     text-decoration: underline;
 }
 
@@ -123,42 +123,42 @@ a[href] {
 
 .filtros-titulo {
     font-weight: bold;
-    color: var(--cor-superficie); /* cor do titulo filtro */
+    color: var(--cor-btn-dois); /* cor do titulo filtro */
 }
 
 .filtro-grupo {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    color: var(--cor-texto)
+    color: var(--cor-btn-dois) /* cor dos texto dentro dos filtros */
 }
 
 .filtro-grupo label {
     font-size: 1rem;
-    color: var(--cor-superficie); /* cor acima dos filtros */
+    color: var(--cor-btn-dois); /* cor acima dos filtros */
 }
 
 .filtro-grupo select,
 .filtro-grupo input {
-    background-color: var(--cor-texto-suave); /* cor de fundo dos filtros */
-    color: var(--cor-superficie); /* cor do texto dos filtros */
-    border: 1px solid var(--cor-superficie); /* borda dos filtros */
+    background-color: var(--cor-texto-dois); /* cor de fundo dos filtros */
+    color: var(--cor-btn-dois); /* cor do texto dos filtros */
+    border: 1px solid var(--cor-btn-dois); /* borda dos filtros */
     border-radius: 6px;
     padding: 6px 10px;
 }
 
 a.btn.btn-danger {
-    background-color: var(--cor-danger); /* cor do botão arquivar */
+    background-color: var(--cor-texto-dois); /* cor do botão arquivar */
 }
 
 a.btn.btn-danger:hover {
-    background-color: #dc2626;
+    background-color: #cfcfcf;
 }
 
 button.btn {
-    background-color: var(--cor-fundo); /* cor do botao atualizar status */
+    background-color: var(--cor-texto-dois); /* cor do botao atualizar status */
     display: inline-block;
-    color: var(--cor-superficie); /* cor do texto do btn */
+    color: var(--cor-btn-dois); /* cor do texto do btn */
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
@@ -168,7 +168,7 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: var(--cor-superficie); /* cor ao passar por cima */
+    background-color: var(--cor-cards); /* cor ao passar por cima */
 }
 
 .badge {
@@ -181,32 +181,32 @@ button.btn:hover {
 
 .badge-a_fazer {
     background-color: var(--cor-a-fazer);/*cores das badges de infos dentro dos cards tarefas, mesma regra para abaixo*/
-    color: var(--cor-texto);
+    color: var(--cor-btn-dois);
 }
 
 .badge-em_andamento {
-    background-color: var(--cor-em-andamento);
-    color: var(--cor-texto);
+    background-color: var(--cor-a-fazer);
+    color: var(--cor-btn-dois);
 }
 
 .badge-em_revisao {
-    background-color: var(--cor-em-revisao);
-    color: var(--cor-texto);
+    background-color: var(--cor-a-fazer);
+    color: var(--cor-btn-dois);
 }
 
 .badge-concluida {
     background-color: var(--cor-concluida);
-    color: var(--cor-texto);
+    color: var(--cor-btn-dois);
 }
 
 .badge-cancelada {
     background-color: var(--cor-cancelada);
-    color: var(--cor-texto);
+    color: var(--cor-btn-dois);
 }
 
 .tarefa-item {
-    background-color: var(--cor-texto-suave); /* cor de fundo dos cards */
-    border: 2px solid var(--cor-superficie); /* cor de borda do card arquivado */
+    background-color: var(--cor-cards); /* cor de fundo dos cards */
+    border: 2px solid var(--cor-btn-dois); /* cor de borda do card arquivado */
     padding: 11px;
     margin-bottom: 11px;
     border-radius: 5px;
@@ -223,13 +223,13 @@ button.btn:hover {
 .tarefa-titulo {
     font-size: 1rem;
     font-weight: bold;
-    color: var(--cor-superficie); /* cor do titulo da tarefa */
+    color: var(--cor-btn-dois); /* cor do titulo da tarefa */
     margin: 0;
 }
 
 .tarefa-responsavel {
     font-size: 1rem;
-    color: var(--cor-superficie); /* cor responsavel */
+    color: var(--cor-btn-dois); /* cor responsavel */
     margin: 4px 0 0 0;
 }
 
@@ -242,7 +242,7 @@ button.btn:hover {
 
 .tarefa-prazo {
     font-size: 0.8rem;
-    color: var(--cor-superficie);
+    color: var(--cor-btn-dois);
 }
 
 .tarefa-acoes {
@@ -258,7 +258,7 @@ button.btn:hover {
 
 .tarefa-descricao {
     font-size: 1rem;
-    color: var(--cor-superficie);
+    color: var(--cor-btn-dois); /* cor da descrição das tarefas */
     margin-top: 6px;
     word-break: break-all;
     max-width: 100%;
@@ -272,7 +272,7 @@ button.btn:hover {
 }
 
 .kanban-coluna {
-    background-color: var(--cor-texto-suave); /* fundo das colunas kanban */
+    background-color: var(--cor-cards); /* fundo dos cards kanban */
     border-radius: 8px;
     padding: 12px;
     min-width: 200px;
@@ -281,29 +281,29 @@ button.btn:hover {
 
 .kanban-coluna-titulo {
     font-weight: bold;
-    color: var(--cor-superficie); /* titulos do kanban */
+    color: var(--cor-btn-dois); /* titulos do kanban */
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--cor-superficie); /* separador do titulo para tarefas */
+    border-bottom: 2px solid var(--cor-btn-dois); /* separador do titulo para tarefas */
 }
 
 .tarefa-card {
-    background-color: var(--cor-fundo); /*cor da tarefa do kanban fundo */
+    background-color: var(--cor-fundo-bordas); /* cor da tarefa do kanban fundo */
     border-radius: 6px;
     padding: 10px;
     margin-bottom: 8px;
-    border-left: 4px solid var(--cor-superficie); /* borda da esquerda do card no kanban */
+    border-left: 4px solid var(--cor-btn-dois); /* borda da esquerda do card no kanban */
 } 
 
 .tarefa-card h3 {
     font-size: 0.9rem;
-    color: var(--cor-superficie); /* titulo da tarefa no kanban */
+    color: var(--cor-btn-dois); /* titulo da tarefa no kanban */
     margin: 0 0 4px 0;
 }
 
 .tarefa-card p {
     font-size: 0.8rem;
-    color: var(--cor-superficie);
+    color: var(--cor-btn-dois);
     margin: 0;
 }
 
@@ -397,24 +397,24 @@ textarea {
     }
 
     .grafico-card {
-    background-color: var(--cor-texto-suave); /* cor de fundo do card do grafico */
+    background-color: var(--cor-cards); /* cor de fundo do card do grafico */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 24px;
-    box-shadow: 0 4px 15px rgba(27, 2, 255, 0.2);
+    box-shadow: 0 4px 15px rgb(0, 0, 0);
 }
 
 .grafico-card h2 {
-    color: var(--cor-superficie); /* titulo card graficos */
+    color: var(--cor-btn-dois); /* titulo card graficos */
     font-size: 1rem;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--cor-superficie);
+    border-bottom: 2px solid var(--cor-btn-dois);
 }
 
 .texto-suave {
     font-size: 0.8rem;
-    color: var(--cor-texto);
+    color: var(--cor-btn-dois);
     margin-top: -10px;
     margin-bottom: 10px;
 }
@@ -428,31 +428,31 @@ textarea {
 .sidebar {
     width: 250px;
     flex-shrink: 0;
-    background-color: var(--cor-fundo); /* fundo do card de filtros */
-    color: var(--cor-superficie);
+    background-color: var(--cor-cards); /* fundo do card de filtros */
+    color: var(--cor-btn-dois);
     padding: 20px;
     
 }
 
 .conteudo {
     padding: 20px;
-    background-color:var(--cor-texto-suave); /* fundo do layout de tarefas */
+    background-color:var(--cor-texto-dois); /* fundo do layout de tarefas */
     flex: 1;
     display: flex;
     flex-direction: column;    
 }
 
 .header {
-    background-color: var(--cor-fundo); /* fundo do card do titulo da pagina */
+    background-color: var(--cor-cards); /* fundo do card do titulo da pagina */
     padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--cor-superficie); /*borda do car pro titulo pra baixo */
+    border-bottom: 2px solid var(--cor-btn-dois); /*borda do car pro titulo pra baixo */
 }
 
 .paginacao {
-    background-color: var(--cor-texto-suave);
+    background-color: var(--cor-cards); /* card proxima pagina */
     display: flex;
     justify-content: flex-end;
     padding: 16px;
@@ -465,44 +465,52 @@ textarea {
 }
 
 .btn-sair {
-    background-color: var(--cor-texto-suave);
-    color: var(--cor-superficie);
+    background-color: var(--cor-texto-dois); /* btn sair */
+    color: var(--cor-btn-dois);
     padding: 6px 10px;
     border-radius: 5px;
 }
 
 .btn-proxima {
-    background-color: var(--cor-fundo);
-    color: var(--cor-superficie);
-    padding: 6px 13px;
-    border-radius: 2px;
+    background-color: var(--cor-texto-dois); /* btn proxima pagina */
+    color: var(--cor-btn-dois);
+    padding: 6px 10px;
+    border-radius: 5px;
 }
 
 .btn-anterior {
-    background-color: var(--cor-fundo);
-    color: var(--cor-superficie);
+    background-color: var(--cor-texto-dois);
+    color: var(--cor-texto-um);
     padding: 6px 10px;
     border-radius: 5px;
 }
 
 .btn-editar {
-    background-color: var(--cor-fundo);
-    color: var(--cor-superficie);
+    background-color: var(--cor-texto-dois);
+    color: var(--cor-btn-dois);
     padding: 6px 10px;
     border-radius: 5px;
 }
 
+.btn-editar:hover {
+    background-color: var(--cor-cards);
+}
+
 a.btn-sair {
-    background-color: var(--cor-texto-suave);
-    color: var(--cor-superficie);
-    padding: 4px 8px;
-    border-radius: 5px;
+    background-color: var(--cor-texto-dois); /* btn voltar do editar tarefa */
+    display: inline-block;
+    color: var(--cor-btn-dois);
+    padding: 6px 11px;
+    text-decoration: none;
+    border-radius: 1px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 a.btn.btn-voltar {
-    background-color: var(--cor-texto-suave); /* btn submit do editar tarefa */
+    background-color: var(--cor-texto-dois); /* btn voltar do editar tarefa */
     display: inline-block;
-    color: var(--cor-superficie);
+    color: var(--cor-btn-dois);
     padding: 6px 11px;
     text-decoration: none;
     border-radius: 1px;
@@ -515,7 +523,7 @@ a.btn.btn-voltar {
     width: 100%;
     margin: 40px auto;
     padding: 30px;
-    background-color: var(--cor-texto-suave);
+    background-color: var(--cor-cards);
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgb(206, 208, 209);
 }
